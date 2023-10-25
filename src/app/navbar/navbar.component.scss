@@ -1,0 +1,10 @@
+@import '../../styles.scss';
+
+.navbar{
+    background-color: $bgTransparent;
+    .social-icons{
+        i{
+            margin: 0 10px;
+        }
+    }
+}

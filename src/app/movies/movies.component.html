@@ -1,0 +1,30 @@
+<div class="row py-3 gy-2">
+    <input [(ngModel)]="term" type="text" placeholder="Serach By Name......" class="text-white form-control bg-transparent">
+    <div class="col-md-4">
+        <div class="item-text">
+            <div class="brdr w-25 mb-4"></div>
+            <h3>Trending</h3>
+            <h3>Movies</h3>
+            <h3>To Watch Now</h3>
+            <span class="text-info">Most Watched Movies By Day</span>
+            <div class="brdr w-100 mt-4"></div>
+        </div>
+    </div>
+    <div class="col-md-2" *ngFor="let movie of moviesList|search:term">
+        <a class="nav-link" [routerLink]="['/details',movie.id,movie.media_type]">
+            <div class="item position-relative">
+                <img [src]="imgBaseUrl+movie.poster_path" class="w-100 my-2" alt="">
+                <!-- Custom Pipes -->
+                <h2 class="h6">{{movie.title|watch}}</h2>
+                <h2 class="h6">{{movie.overview|seemore:5}}</h2>
+                <!-- BuiltIn Pipe -->
+                <!-- <h2 class="h6">{{movie.title|uppercase}}</h2>
+                <h2 class="h6">{{movie.title|lowercase}}</h2>
+                <h5>{{price|currency:'EUR'}}</h5>
+                <h5>{{userInfo|json}}</h5> -->
+                <span class="position-absolute top-0 end-0 p-1 bg-info">{{movie.vote_average.toFixed(1)}}</span>
+            </div>
+        </a>
+    </div>
+    
+</div>

@@ -1,0 +1,25 @@
+<div class="w-75 m-auto py-5">
+    <h1>Login Form</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <div class="alert text-danger"></div>
+        <div class="input-data">
+            <label>Email</label>
+            <input type="email" class="form-control my-2" formControlName="email">
+            <div class="alert text-danger" *ngIf="loginForm.controls.email.errors && loginForm.controls.email.touched">
+                <p *ngIf="loginForm.controls.email.errors.required">Email Is Required</p>
+                <p *ngIf="loginForm.controls.email.errors.email">Email Is Invalid </p>
+            </div>
+        </div>
+        <div class="input-data">
+            <label>Password</label>
+            <input type="password" class="form-control my-2" formControlName="password">
+            <div class="alert text-danger" *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
+                <p *ngIf="loginForm.controls.password.errors.required">Password Is Required</p>
+                <p *ngIf="loginForm.controls.password.errors.pattern">Password Is Invalid</p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info my-3 float-end" [disabled]="loginForm.invalid">Login</button>
+        <div class="clear-fix"></div>
+    </form>
+</div>
