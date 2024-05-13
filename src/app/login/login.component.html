@@ -1,5 +1,6 @@
 <div class="w-75 m-auto py-5">
     <h1>Login Form</h1>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
         <div class="alert text-danger"></div>
         <div class="input-data">
@@ -19,7 +20,10 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-info my-3 float-end" [disabled]="loginForm.invalid">Login</button>
+        <button type="submit" class="btn btn-info my-3 float-end" [disabled]="loginForm.invalid">
+            <span *ngIf="!isLoading">Login</span> 
+            <span *ngIf="isLoading"><i class="fa-solid fa-spinner fa-spin"></i></span> 
+        </button>
         <div class="clear-fix"></div>
     </form>
 </div>

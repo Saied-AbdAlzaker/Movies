@@ -1,3 +1,40 @@
-<app-movies></app-movies>
-<app-tvshows></app-tvshows>
-<app-people></app-people>
+<div class="container-fluid mt-3">
+    <owl-carousel-o [options]="customOptions">
+
+        <ng-container *ngFor="let movie of moviesList">
+            <ng-template carouselSlide [id]="movie.id">
+                <img [src]="imgBaseUrl+movie.poster_path" class="w-100" [alt]="movie.alt" [title]="movie.title">
+            </ng-template>
+        </ng-container>
+    
+    </owl-carousel-o>
+
+    <div class="row py-3 gy-2">
+        <div class="col-md-4 d-flex align-items-center">
+            <div class="item-text">
+                <div class="brdr w-25 mb-2"></div>
+                <h3>Trending</h3>
+                <h3>Movies</h3>
+                <h3>To Watch Now</h3>
+                <span class="text-info">Most Watched Movies By Day</span>
+                <div class="brdr w-100 mt-2"></div>
+            </div>
+        </div>
+        <div class="col-md-2" *ngFor="let movie of moviesList">
+            <a class="nav-link" [routerLink]="['/details',movie.id,movie.media_type]">
+                <div class="item position-relative">
+                    <img [src]="imgBaseUrl+movie.poster_path" class="w-100" alt="">
+                    <h2 class="h6">{{movie.title|watch}}</h2>
+                    <h2 class="h6">{{movie.overview|seemore:5}}</h2>
+                    <div class="position-absolute top-0 end-0 p-1 bg-info text-white">{{movie.vote_average.toFixed(1)}}
+                    </div>
+                </div>
+            </a>
+        </div>
+    
+    </div>
+    
+    <!-- <app-movies></app-movies> -->
+    <app-tvshows></app-tvshows>
+    <app-people></app-people>
+</div>

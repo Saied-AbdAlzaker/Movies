@@ -1,19 +1,26 @@
 <div class="row py-3 gy-2">
-    <input [(ngModel)]="term" type="text" placeholder="Serach By Name......" class="text-white form-control bg-transparent">
-    <div class="col-md-4">
+    <input [(ngModel)]="searchItem" type="text" placeholder="Serach By Name......" class="form-control">
+    <nav aria-label="...">
+        <ul class="pagination pagination-sm d-flex justify-content-center">
+            <li class="page-item" *ngFor="let item of pageItem" (click)="getPaageItem(item)">
+                <a class="page-link bg-transparent p-2 active cursor">{{item}}</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="col-md-4 d-flex align-items-center">
         <div class="item-text">
-            <div class="brdr w-25 mb-4"></div>
+            <div class="brdr w-25 mb-2"></div>
             <h3>Trending</h3>
             <h3>Movies</h3>
             <h3>To Watch Now</h3>
             <span class="text-info">Most Watched Movies By Day</span>
-            <div class="brdr w-100 mt-4"></div>
+            <div class="brdr w-100 mt-2"></div>
         </div>
     </div>
-    <div class="col-md-2" *ngFor="let movie of moviesList|search:term">
+    <div class="col-md-2" *ngFor="let movie of moviesList|search:searchItem">
         <a class="nav-link" [routerLink]="['/details',movie.id,movie.media_type]">
             <div class="item position-relative">
-                <img [src]="imgBaseUrl+movie.poster_path" class="w-100 my-2" alt="">
+                <img [src]="imgBaseUrl+movie.poster_path" class="w-100" alt="">
                 <!-- Custom Pipes -->
                 <h2 class="h6">{{movie.title|watch}}</h2>
                 <h2 class="h6">{{movie.overview|seemore:5}}</h2>
@@ -22,9 +29,10 @@
                 <h2 class="h6">{{movie.title|lowercase}}</h2>
                 <h5>{{price|currency:'EUR'}}</h5>
                 <h5>{{userInfo|json}}</h5> -->
-                <span class="position-absolute top-0 end-0 p-1 bg-info">{{movie.vote_average.toFixed(1)}}</span>
+                <div class="position-absolute top-0 end-0 p-1 bg-info text-white">{{movie.vote_average.toFixed(1)}}
+                </div>
             </div>
         </a>
     </div>
-    
+
 </div>

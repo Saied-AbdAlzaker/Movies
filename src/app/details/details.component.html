@@ -7,6 +7,9 @@
     <div class="col-md-9">
         <h3>{{itemDetails.title}}{{itemDetails.name}}</h3>
         <p>{{itemDetails.overview}}</p>
+        <ul>
+            <li *ngFor="let item of itemDetails.genres">{{item.name}}</li>
+        </ul>
 
         <h6 *ngIf="itemDetails.vote_average" >vote_average : {{itemDetails.vote_average}}</h6>
         <h6 *ngIf="itemDetails.vote_count" >vote_count : {{itemDetails.vote_count}}</h6>

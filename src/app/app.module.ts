@@ -18,16 +18,15 @@ import { TvshowsComponent } from './tvshows/tvshows.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { WatchPipe } from './watch.pipe';
-import { SeemorePipe } from './seemore.pipe';
-import { SearchPipe } from './search.pipe';
-import { ApiKeyInterceptor } from './api-key.interceptor';
+import { WatchPipe } from './Pipes/watch.pipe';
+import { SeemorePipe } from './Pipes/seemore.pipe';
+import { SearchPipe } from './Pipes/search.pipe';
+import { ApiKeyInterceptor } from './Services/api-key.interceptor';
 import { SettingsModule } from './settings/settings.module';
 
-
 // import { TranslateModule , TranslateLoader } from '@ngx-translate/core';
-
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -56,7 +55,8 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     SettingsModule,
-    // BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule, // required animations module
+    CarouselModule,
     ToastrModule.forRoot(), // ToastrModule added
     // TranslateModule.forRoot({
     //   loader:{

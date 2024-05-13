@@ -7,9 +7,10 @@ import { PasswordComponent } from './password/password.component';
 // Lazy Loading (Multi Modules)
 
 const routes: Routes = [
-  {path:'',component:ProfileComponent},
+  {path:'',redirectTo:'privacy',pathMatch:'full'},
   {path:'privacy',component:PrivacyComponent},
-  {path:'password',component:PasswordComponent}
+  {path:'profile',component:ProfileComponent},
+  {path:'password',component:PasswordComponent},
 ];
 
 @NgModule({

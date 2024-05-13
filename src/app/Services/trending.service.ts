@@ -21,4 +21,9 @@ export class TrendingService {
     return this.http.get(`https://api.themoviedb.org/3/${mediaType}/${id}?api_key=&language=en-US`);
   }
 
+  getPaginatedMovies(page:number):Observable<any>
+  {
+    return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.dsec&page=${page}`);
+  }
+
 }

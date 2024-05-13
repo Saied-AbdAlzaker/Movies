@@ -1,42 +1,60 @@
-import { AuthService } from './../auth.service';
-import { FormGroup , FormControl , Validators } from '@angular/forms';
+import { AuthService } from '../Services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
-  constructor(private _AuthService:AuthService,private _Router:Router) {}
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
-  loginForm:FormGroup = new FormGroup({
-    email:new FormControl(null,[Validators.required,Validators.email]),
-    password:new FormControl(null,[Validators.required,Validators.pattern(/^[a-z][0-9]{3}$/)])
+  constructor(private _AuthService: AuthService, private _Router: Router, private toastr: ToastrService) { }
+
+  ngOnInit(): void { }
+
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')])
   })
 
-  submitForm(){
-    if(this.loginForm.invalid){
+  submitForm() {
+    this.isLoading = true;
+
+    if (this.loginForm.invalid) {
       return;
     }
 
-    console.log(this.loginForm.value);
+    this._AuthService.login(this.loginForm.value).subscribe({
+      next: (res) => {
 
-    this._AuthService.login(this.loginForm.value).subscribe((data)=>{
-      if(data.message == 'success'){
-        localStorage.setItem('userToken',data.token);
-        this._AuthService.saveUserData();
-        this._Router.navigateByUrl('/home');
-      } else{
-        alert(data.message)
+        if (res.message == 'success') {
+          localStorage.setItem('userToken', res.token);
+          this._AuthService.saveUserData();
+
+          this._Router.navigate(['home']);
+          this.isLoading = false;
+
+          // this.toastr.success('Logged In Success', 'login page')
+        } else {
+          // this.toastr.error(res.message, 'Error Message');
+          this.errorMessage = res.message;
+          this.isLoading = false;
+
+        }
+      }, error: (err) => {
+        this.isLoading = false;
+
+      }, complete: () => {
+        this.isLoading = false;
+
       }
     })
-    
-  }
-
-  ngOnInit():void {
 
   }
 
