@@ -25,7 +25,7 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'logout',component:LoginComponent},
-
+// Lazy Loading
   {path:'settings',loadChildren:()=>import('./settings/settings.module').then(m=>m.SettingsModule),canActivate:[AuthGuard]},
   {path:'**',component:NotfoundComponent}
 ];
