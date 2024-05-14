@@ -24,11 +24,6 @@
                 <!-- Custom Pipes -->
                 <h2 class="h6">{{movie.title|watch}}</h2>
                 <h2 class="h6">{{movie.overview|seemore:5}}</h2>
-                <!-- BuiltIn Pipe -->
-                <!-- <h2 class="h6">{{movie.title|uppercase}}</h2>
-                <h2 class="h6">{{movie.title|lowercase}}</h2>
-                <h5>{{price|currency:'EUR'}}</h5>
-                <h5>{{userInfo|json}}</h5> -->
                 <div class="position-absolute top-0 end-0 p-1 bg-info text-white">{{movie.vote_average.toFixed(1)}}
                 </div>
             </div>

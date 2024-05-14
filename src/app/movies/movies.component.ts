@@ -13,13 +13,6 @@ export class MoviesComponent implements OnInit {
   searchItem: string = '';
   pageItem = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  // BuiltIn Pipe
-  price: number = 2000;
-  userInfo: object = {
-    name: 'Saed',
-    age: 22
-  }
-
   constructor(private _TrendingService: TrendingService) {
     this.imgBaseUrl = _TrendingService.imgBaseUrl;
   }
